@@ -3,7 +3,7 @@ session_start();
 require_once("controllers/db.php");
 
 // Проверка прав администратора
-if (isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'admin') {
     header("Location: login.php");
     exit();
 }

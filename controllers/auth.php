@@ -11,6 +11,7 @@ if ($result->num_rows > 0){
   session_start();
   $_SESSION["role"] = $role;
   $_SESSION["id"] = $id;
+  echo $_SESSION["role"];
   if ($role === "user"){
     header("Location: ../profile.php");
   } else if ($role = "admin") {

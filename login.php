@@ -1,6 +1,6 @@
 <?php
 session_start();
-if (!isset($_SESSION["role"])){
+if (isset($_SESSION["role"])){
   if ($_SESSION["role"] === "user"){
     header("Location: profile.php");
     exit;
