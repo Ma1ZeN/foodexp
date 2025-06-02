@@ -3,7 +3,8 @@ session_start();
 require_once("controllers/db.php");
 $user_id=$_SESSION["id"];
 $sql="SELECT * FROM cart WHERE user_id = $user_id";
-$result = $conn->query($sql);
+$sql1="SELECT * FROM Menu"
+$result = $conn->query($sql);++
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -138,6 +139,11 @@ $result = $conn->query($sql);
             <!-- Место для выгрузки товаров из корзины -->
             <div id="cart-items-container">
               <!-- Пример товара (будет заменен серверным рендерингом) -->
+               <?php
+               while($cart = $result->fetch_assoc()){
+                echo
+               }
+               ?>
               <div class="card mb-3 cart-item">
                 <div class="row g-0">
                   <div class="col-md-3">
