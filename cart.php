@@ -1,18 +1,4 @@
-<?php
-session_start();
-require_once("controllers/db.php");
-$user_id=$_SESSION["id"];
-<<<<<<< HEAD
-$sql="SELECT * FROM cart WHERE user_id = $user_id";
-$sql1="SELECT * FROM Menu"
-$result = $conn->query($sql);++
-=======
-$sql="SELECT product_id FROM cart WHERE user_id = $user_id";
-$result = $conn->query($sql);
 
-
->>>>>>> 77c1b1bcf9b9a625351dad83f6ed6f6e45311d33
-?>
 <!DOCTYPE html>
 <html lang="ru">
   <head>
