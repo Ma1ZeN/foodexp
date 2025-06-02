@@ -122,7 +122,10 @@ $result = $conn->query($sql);
                 <a class="nav-link" href="support.html">Обратная связь</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link active" href="cart.php">Корзина</a>
+                <a class="nav-link" href="profile.php">Профиль</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.php">Корзина</a>
               </li>
             </ul>
           </div>

@@ -33,68 +33,145 @@ $result = $conn->query($sql);
     />
     <link rel="manifest" href="/site.webmanifest" />
     <style>
-      .cart-btn {
-        position: relative;
+      :root {
+        --primary-color: #d10f18;
+        --secondary-color: #f8f9fa;
+        --text-color: #333;
+        --light-text: #6c757d;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
       }
-      .cart-count {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background: #d10f18;
-        color: white;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
       }
-      .offcanvas-cart {
-        width: 400px;
-      }
-      .minus-item,
-      .plus-item {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-      }
-      .cart-btn {
-        position: relative;
-      }
-      .cart-count {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background: #d10f18;
-        color: white;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .offcanvas-cart {
-        width: 400px;
-      }
-      .category-icon {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-      }
+      
+      /* Улучшенные карточки заведений */
       .establishment-card {
-        transition: transform 0.2s;
+        transition: var(--transition);
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+        height: 100%;
       }
+      
       .establishment-card:hover {
-        transform: translateY(-5px);
+        transform: translateY(-8px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
       }
-      .menu-item-badge {
-        font-size: 0.75rem;
+      
+      .card-img-container {
+        height: 200px;
+        overflow: hidden;
+        position: relative;
+      }
+      
+      .card-img-container img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+      
+      .establishment-card:hover .card-img-container img {
+        transform: scale(1.05);
+      }
+      
+      .card-body {
+        padding: 20px;
+      }
+      
+      .card-title {
+        font-weight: 700;
+        font-size: 1.25rem;
+        margin-bottom: 8px;
+        color: var(--text-color);
+      }
+      
+      .card-text {
+        color: var(--light-text);
+        font-size: 0.9rem;
+        margin-bottom: 12px;
+      }
+      
+      .badge-rating {
+        background-color: rgba(255, 215, 0, 0.2);
+        color: #ffc107;
+        font-weight: 600;
+        padding: 5px 10px;
+        border-radius: 20px;
+        display: inline-flex;
+        align-items: center;
+      }
+      
+      .badge-rating svg {
+        margin-right: 5px;
+      }
+      
+      .work-time {
+        color: var(--light-text);
+        font-size: 0.85rem;
+      }
+      
+      .btn-choose {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 0;
+        font-weight: 600;
+        width: 100%;
+        transition: var(--transition);
+        margin-top: 15px;
+      }
+      
+      .btn-choose:hover {
+        background-color: #b00d15;
+        transform: translateY(-2px);
+      }
+      
+      .card-footer {
+        background: white;
+        border-top: 1px solid rgba(0, 0, 0, 0.05);
+        padding: 15px 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .delivery-info {
+        font-size: 0.8rem;
+        color: var(--light-text);
+      }
+      
+      .delivery-info span {
+        color: var(--primary-color);
+        font-weight: 600;
+      }
+      
+      /* Дополнительные стили */
+      .section-title {
+        position: relative;
+        margin-bottom: 30px;
+        font-weight: 700;
+      }
+      
+      .section-title:after {
+        content: '';
+        position: absolute;
+        bottom: -10px;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: var(--primary-color);
+      }
+      
+      .alert-info {
+        border-left: 4px solid var(--primary-color);
+        border-radius: 0;
       }
     </style>
   </head>
@@ -154,118 +231,62 @@ $result = $conn->query($sql);
               <li class="nav-item">
                 <a class="nav-link" href="login.php">Профиль</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.php">Корзина</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
-      <button
-        class="btn btn-outline-danger position-fixed cart-btn"
-        style="top: 20px; right: 20px; z-index: 1000"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#cartOffcanvas"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          class="bi bi-cart"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-          />
-        </svg>
-        <span class="cart-count" id="cartCounter">0</span>
-      </button>
     </header>
 
     <main class="border-top border-danger border-3">
-      <div class="container-fluid py-4">
-       
+      <div class="container py-4">
+        <h2 class="section-title">Рестораны и кафе</h2>
+        
+        <div class="alert alert-info">
+          <strong>Доступные заведения:</strong> Выберите место, где хотите заказать.
+        </div>
 
-          <div class="alert alert-info">
-            <strong>Доступные заведения:</strong> Выберите место, где хотите
-            заказать.
-          </div>
-
-          <div class="row g-4" id="establishments-container">
-            <?php
-            while ($restoran = $result-> fetch_assoc()) {
-              echo '<div
-              class="card establishment-card h-100 border-0 shadow-sm"
-              data-id="'.$restoran["id"].'"
-            >
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img
-                    src="'.$restoran["img"].'"
-                    class="img-fluid rounded-start h-100"
-                    style="object-fit: cover"
-                  />
+        <div class="row" id="establishments-container">
+          <?php
+          while ($restoran = $result->fetch_assoc()) {
+            echo '
+            <div class="col-md-6 col-lg-4">
+              <div class="card establishment-card h-100">
+                <div class="card-img-container">
+                  <img src="'.$restoran["img"].'" alt="'.$restoran["name"].'" />
                 </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">'.$restoran["name"].'</h5>
-                    <p class="card-text text-muted small">'.$restoran["adress"].'</p>
-                    <div
-                      class="d-flex justify-content-between align-items-center"
+                <div class="card-body">
+                  <h5 class="card-title">'.$restoran["name"].'</h5>
+                  <p class="card-text">'.$restoran["adress"].'</p>
+                  <button class="btn btn-choose choose-establishment" data-id="'.$restoran["id"].'">
+                    Выбрать
+                  </button>
+                </div>
+                <div class="card-footer">
+                  <span class="badge-rating">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="#FFD700"
+                      class="bi bi-star-fill"
+                      viewBox="0 0 16 16"
                     >
-                      <span class="badge bg-light text-dark">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="16"
-                          height="16"
-                          fill="#FFD700"
-                          class="bi bi-star-fill"
-                          viewBox="0 0 16 16"
-                        >
-                          <path
-                            d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
-                          />
-                        </svg>
-                        '.$restoran["rating"].'
-                      </span>
-                      <span class="text-muted small">'.$restoran["workTime"].'</span>
-                    </div>
-                    <a href="products.php?id='.$restoran["id"].'"
-                  
-                      class="btn btn-danger w-100 mt-3 choose-establishment"
-                    >
-                      Выбрать
-                    </a>
-                  </div>
+                      <path
+                        d="M3.612 15.443c-.386.198-.824-.149-.746-.592l.83-4.73L.173 6.765c-.329-.314-.158-.888.283-.95l4.898-.696L7.538.792c.197-.39.73-.39.927 0l2.184 4.327 4.898.696c.441.062.612.636.282.95l-3.522 3.356.83 4.73c.078.443-.36.79-.746.592L8 13.187l-4.389 2.256z"
+                      />
+                    </svg>
+                    '.$restoran["rating"].'
+                  </span>
+                  <span class="work-time">'.$restoran["workTime"].'</span>
                 </div>
               </div>
             </div>';
-            }
-            ?>
-            
-          </div>
-        </section>
-
-        <!-- Шаг 3: Меню заведения (изначально скрыт) -->
-        <section id="step-menu" style="display: none">
-          <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-              <h2 class="text-danger mb-0" id="establishment-name">Маруша</h2>
-              <p class="text-muted mb-0" id="establishment-address">
-                ул. Панфиловцев, 18а
-              </p>
-              <p class="text-muted mb-0" id="establishment-category">Пицца</p>
-            </div>
-            
-          </div>
-
-          <div class="alert alert-success">
-            <strong>Предзаказ доступен!</strong> Выберите блюда, укажите время
-            получения и заберите заказ без очереди.
-          </div>
-
-          <div class="row g-4" id="menu-items-container">
-            <!-- Блюда будут загружаться здесь -->
-          </div>
-        </section>
+          }
+          ?>
+        </div>
       </div>
     </main>
 
@@ -301,35 +322,16 @@ $result = $conn->query($sql);
         </li>
       </ul>
     </footer>
-    <div
-      class="offcanvas offcanvas-end offcanvas-cart"
-      tabindex="-1"
-      id="cartOffcanvas"
-    >
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title">Ваша корзина</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body" id="cartItems">
-        <!-- Тут будут товары -->
-        <div class="text-center text-muted py-4">Корзина пуста</div>
-      </div>
-      <div class="offcanvas-footer border-top p-3">
-        <div class="d-flex justify-content-between mb-3">
-          <span>Итого:</span>
-          <span class="fw-bold" id="cartTotal">0 ₽</span>
-        </div>
-        <button class="btn btn-danger w-100">Оформить заказ</button>
-      </div>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-       
+      // Добавляем обработчик для кнопок выбора
+      document.querySelectorAll('.choose-establishment').forEach(button => {
+        button.addEventListener('click', function() {
+          const establishmentId = this.getAttribute('data-id');
+          window.location.href = `products.php?id=${establishmentId}`;
+        });
+      });
     </script>
   </body>
 </html>

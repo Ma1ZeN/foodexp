@@ -14,6 +14,7 @@ $result = $conn->query($sql);
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
     <link rel="stylesheet" href="style.css" />
     <link
       rel="apple-touch-icon"
@@ -34,68 +35,169 @@ $result = $conn->query($sql);
     />
     <link rel="manifest" href="/site.webmanifest" />
     <style>
-      .cart-btn {
-        position: relative;
+      :root {
+        --primary-color: #d10f18;
+        --secondary-color: #f8f9fa;
+        --text-color: #333;
+        --light-text: #6c757d;
+        --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        --transition: all 0.3s ease;
       }
-      .cart-count {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background: #d10f18;
-        color: white;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+      
+      body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: var(--text-color);
+        background-color: #f9f9f9;
       }
-      .offcanvas-cart {
-        width: 400px;
+      
+      /* Улучшенные карточки блюд */
+      .menu-item {
+        transition: var(--transition);
+        border: none;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: var(--shadow);
+        margin-bottom: 24px;
+        height: 100%;
+        /* position: relative; */
+        background: white;
       }
-      .minus-item,
-      .plus-item {
-        width: 30px;
-        height: 30px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 0;
-      }
-      .cart-btn {
-        position: relative;
-      }
-      .cart-count {
-        position: absolute;
-        top: -5px;
-        right: -5px;
-        background: #d10f18;
-        color: white;
-        border-radius: 50%;
-        width: 20px;
-        height: 20px;
-        font-size: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-      }
-      .offcanvas-cart {
-        width: 400px;
-      }
-      .category-icon {
-        width: 40px;
-        height: 40px;
-        margin-right: 10px;
-      }
-      .establishment-card {
-        transition: transform 0.2s;
-      }
-      .establishment-card:hover {
+      
+      .menu-item:hover {
         transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
       }
+      
+      .menu-item-img {
+        height: 200px;
+        width: 100%;
+        object-fit: cover;
+        transition: var(--transition);
+      }
+      
+      .menu-item:hover .menu-item-img {
+        transform: scale(1.03);
+      }
+      
       .menu-item-badge {
-        font-size: 0.75rem;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: rgba(0, 0, 0, 0.7);
+        color: white;
+        border-radius: 20px;
+        padding: 5px 12px;
+        font-size: 0.85rem;
+        font-weight: 600;
+        z-index: 1;
+      }
+      
+      .menu-item-body {
+        padding: 20px;
+      }
+      
+      .menu-item-title {
+        font-weight: 700;
+        font-size: 1.1rem;
+        margin-bottom: 8px;
+        color: var(--text-color);
+      }
+      
+      .menu-item-price {
+        font-weight: 700;
+        color: var(--primary-color);
+        font-size: 1.2rem;
+      }
+      
+      .menu-item-desc {
+        color: var(--light-text);
+        font-size: 0.9rem;
+        margin-bottom: 15px;
+        line-height: 1.5;
+      }
+      
+      .btn-add-to-cart {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 0;
+        font-weight: 600;
+        width: 100%;
+        transition: var(--transition);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 0;
+      }
+      
+      .btn-add-to-cart:hover {
+        background-color: #b00d15;
+      }
+      
+      .btn-add-to-cart svg {
+        margin-right: 8px;
+      }
+      
+      /* Анимации */
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+      
+      .menu-item {
+        animation: fadeInUp 0.5s ease forwards;
+        opacity: 0;
+      }
+      
+      /* Задержки для анимации */
+      .menu-item:nth-child(1) { animation-delay: 0.1s; }
+      .menu-item:nth-child(2) { animation-delay: 0.2s; }
+      .menu-item:nth-child(3) { animation-delay: 0.3s; }
+      .menu-item:nth-child(4) { animation-delay: 0.4s; }
+      .menu-item:nth-child(5) { animation-delay: 0.5s; }
+      .menu-item:nth-child(6) { animation-delay: 0.6s; }
+      
+      /* Заголовок страницы */
+      .page-header {
+        position: relative;
+        margin-bottom: 30px;
+        padding-bottom: 15px;
+      }
+      
+      .page-header:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 60px;
+        height: 3px;
+        background: var(--primary-color);
+      }
+      
+      /* Кнопка "Назад" */
+      .btn-back {
+        border: 2px solid var(--primary-color);
+        color: var(--primary-color);
+        font-weight: 600;
+        transition: var(--transition);
+      }
+      
+      .btn-back:hover {
+        background: var(--primary-color);
+        color: white;
+      }
+      
+      /* Уведомление */
+      .alert-success {
+        border-left: 4px solid #28a745;
+        border-radius: 0;
       }
     </style>
   </head>
@@ -155,48 +257,23 @@ $result = $conn->query($sql);
               <li class="nav-item">
                 <a class="nav-link" href="login.php">Профиль</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.php">Корзина</a>
+              </li>
             </ul>
           </div>
         </div>
       </nav>
-      <button
-        class="btn btn-outline-danger position-fixed cart-btn"
-        style="top: 20px; right: 20px; z-index: 1000"
-        data-bs-toggle="offcanvas"
-        data-bs-target="#cartOffcanvas"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          fill="currentColor"
-          class="bi bi-cart"
-          viewBox="0 0 16 16"
-        >
-          <path
-            d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM3.102 4l1.313 7h8.17l1.313-7H3.102zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"
-          />
-        </svg>
-        <span class="cart-count" id="cartCounter">0</span>
-      </button>
     </header>
 
     <main class="border-top border-danger border-3">
-      <div class="container-fluid py-4">
-       
-    
-    <section id="step-menu">
+      <div class="container py-4">
+        <section id="step-menu">
           <div class="d-flex justify-content-between align-items-center mb-4">
-            
-            <div>
-              <a
-                class="btn btn-outline-secondary me-2"
-                id="back-to-establishments"
-                href="menu.php"
-              >
-                ← Назад к заведениям
-    </a>
-            </div>
+            <h2 class="page-header">Меню заведения</h2>
+            <a class="btn btn-back me-2" href="menu.php">
+              ← Назад к заведениям
+            </a>
           </div>
 
           <div class="alert alert-success">
@@ -206,28 +283,34 @@ $result = $conn->query($sql);
 
           <div class="row g-4" id="menu-items-container">
             <?php
-                while($product=$result->fetch_assoc()){
-                    echo'<form action="controllers/addcard.php" method="post"> <div class="card menu-item h-100 border-0 shadow-sm">
-              <div class="position-relative">
-                <img src="'.$product["img"].'" class="card-img-top">
-                
-              </div>
-              <div class="card-body">
-                <div class="d-flex justify-content-between align-items-start mb-2">
-                  <h5 class="card-title mb-0">'.$product["Name"].'</h5>
-                  <span class="text-danger fw-bold">'.$product["Price"].' ₽</span>
-                </div>
-                <p class="card-text text-muted small">'.$product["Opisanie"].'</p>
-              </div>
-              <div class="card-footer bg-white border-0 pt-0">
-              <input name="product_id" value="'.$product["id"].'" type="hidden">
-                <button class="btn btn-danger w-100" type="submit">В корзину</button>
-              </div>
-            </div> </form>';
-
-                }
-                ?>
-          
+            while($product = $result->fetch_assoc()) {
+              echo '
+              <div class="col-md-6 col-lg-4">
+                <form action="controllers/addcard.php" method="post">
+                  <div class="card menu-item h-100">
+                    <div class="position-relative overflow-hidden">
+                      <img src="'.$product["img"].'" class="menu-item-img">
+                      <span class="menu-item-badge">'.$product["Price"].' ₽</span>
+                    </div>
+                    <div class="menu-item-body">
+                      <div class="d-flex justify-content-between align-items-start mb-2">
+                        <h5 class="menu-item-title mb-0">'.$product["Name"].'</h5>
+                      </div>
+                      <p class="menu-item-desc">'.$product["Opisanie"].'</p>
+                      <input name="product_id" value="'.$product["id"].'" type="hidden">
+                      <button class="btn btn-add-to-cart" type="submit">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16">
+                          <path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/>
+                          <path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17z"/>
+                        </svg>
+                        В корзину
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>';
+            }
+            ?>
           </div>
         </section>
       </div>
@@ -265,32 +348,27 @@ $result = $conn->query($sql);
         </li>
       </ul>
     </footer>
-    <div
-      class="offcanvas offcanvas-end offcanvas-cart"
-      tabindex="-1"
-      id="cartOffcanvas"
-    >
-      <div class="offcanvas-header border-bottom">
-        <h5 class="offcanvas-title">Ваша корзина</h5>
-        <button
-          type="button"
-          class="btn-close"
-          data-bs-dismiss="offcanvas"
-          aria-label="Close"
-        ></button>
-      </div>
-      <div class="offcanvas-body" id="cartItems">
-        <!-- Тут будут товары -->
-        <div class="text-center text-muted py-4">Корзина пуста</div>
-      </div>
-      <div class="offcanvas-footer border-top p-3">
-        <div class="d-flex justify-content-between mb-3">
-          <span>Итого:</span>
-          <span class="fw-bold" id="cartTotal">0 ₽</span>
-        </div>
-        <button class="btn btn-danger w-100">Оформить заказ</button>
-      </div>
-    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-</body>
+    <script>
+      // Анимация при загрузке страницы
+      document.addEventListener('DOMContentLoaded', function() {
+        const menuItems = document.querySelectorAll('.menu-item');
+        
+        // Добавляем обработчик для кнопок добавления в корзину
+        document.querySelectorAll('.btn-add-to-cart').forEach(button => {
+          button.addEventListener('click', function(e) {
+            // Можно добавить анимацию добавления в корзину
+            this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Добавляем...';
+            setTimeout(() => {
+              this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check" viewBox="0 0 16 16"><path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/></svg> Добавлено!';
+              setTimeout(() => {
+                this.innerHTML = '<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-plus" viewBox="0 0 16 16"><path d="M9 5.5a.5.5 0 0 0-1 0V7H6.5a.5.5 0 0 0 0 1H8v1.5a.5.5 0 0 0 1 0V8h1.5a.5.5 0 0 0 0-1H9V5.5z"/><path d="M.5 1a.5.5 0 0 0 0 1h1.11l.401 1.607 1.498 7.985A.5.5 0 0 0 4 12h1a2 2 0 1 0 0 4 2 2 0 0 0 0-4h7a2 2 0 1 0 0 4 2 2 0 0 0 0-4h1a.5.5 0 0 0 .491-.408l1.5-8A.5.5 0 0 0 14.5 3H2.89l-.405-1.621A.5.5 0 0 0 2 1H.5zm3.915 10L3.102 4h10.796l-1.313 7h-8.17z"/></svg> В корзину';
+              }, 1000);
+            }, 500);
+          });
+        });
+      });
+    </script>
+  </body>
 </html>

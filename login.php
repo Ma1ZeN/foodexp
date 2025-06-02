@@ -100,6 +100,9 @@ if (isset($_SESSION["role"])){
               <li class="nav-item">
                 <a class="nav-link" href="login.php">Профиль</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cart.php">Корзина</a>
+              </li>
             </ul>
           </div>
         </div>
