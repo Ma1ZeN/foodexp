@@ -7,7 +7,7 @@ $lname = $_POST["lname"];
 $numberInput = $_POST["number"];
 $sql = "INSERT INTO Users(fname, lname, phonenumber, login, password, role) VALUES ('$fname','$lname','$numberInput','$loginInput','$passwordInput','user')";
 if ($conn->query($sql)){
-    header("location: ../profile.php");
+    header("location: ../login.php");
 } else {
     echo "Регистрация не успешна";
 };

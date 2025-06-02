@@ -189,12 +189,13 @@ $result = $conn->query($sql);
           <div class="d-flex justify-content-between align-items-center mb-4">
             
             <div>
-              <button
+              <a
                 class="btn btn-outline-secondary me-2"
                 id="back-to-establishments"
+                href="menu.php"
               >
                 ← Назад к заведениям
-              </button>
+    </a>
             </div>
           </div>
 
@@ -206,7 +207,7 @@ $result = $conn->query($sql);
           <div class="row g-4" id="menu-items-container">
             <?php
                 while($product=$result->fetch_assoc()){
-                    echo'<div class="card menu-item h-100 border-0 shadow-sm">
+                    echo'<form action="controllers/addcard.php" method="post"> <div class="card menu-item h-100 border-0 shadow-sm">
               <div class="position-relative">
                 <img src="'.$product["img"].'" class="card-img-top">
                 
@@ -219,9 +220,11 @@ $result = $conn->query($sql);
                 <p class="card-text text-muted small">'.$product["Opisanie"].'</p>
               </div>
               <div class="card-footer bg-white border-0 pt-0">
-                <button class="btn btn-danger w-100">В корзину</button>
+              <input name="product_id" value="'.$product["id"].'" type="hidden">
+                <button class="btn btn-danger w-100" type="submit">В корзину</button>
               </div>
-            </div>';
+            </div> </form>';
+
                 }
                 ?>
           
