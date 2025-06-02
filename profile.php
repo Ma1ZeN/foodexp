@@ -59,7 +59,7 @@ $orders_result = mysqli_query($conn, $orders_query);
     <header>
       <nav class="navbar navbar-expand-lg bg-white p-0">
         <div class="container-fluid">
-          <a class="navbar-brand" href="index.php"
+          <a class="navbar-brand" href="index.html"
             ><img
               src="img/logo.png"
               alt="Логотип ТочноВкусно"
@@ -96,7 +96,7 @@ $orders_result = mysqli_query($conn, $orders_query);
           <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
               <li class="nav-item">
-                <a class="nav-link" href="index.php">Главная</a>
+                <a class="nav-link" href="index.html">Главная</a>
               </li>
               <li class="nav-item">
                 <a class="nav-link" href="menu.php">Меню</a>
@@ -254,7 +254,7 @@ $orders_result = mysqli_query($conn, $orders_query);
 
       <ul class="nav col-md-4 justify-content-end">
         <li class="nav-item">
-          <a href="index.php" class="nav-link px-2 text-muted">Главная</a>
+          <a href="index.html" class="nav-link px-2 text-muted">Главная</a>
         </li>
         <li class="nav-item">
           <a href="menu.php" class="nav-link px-2 text-muted">Меню</a>
