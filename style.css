@@ -1,0 +1,283 @@
+.redphone {
+  color: #d10f18;
+}
+.pizza {
+  animation: gradient 40s ease infinite;
+  background: linear-gradient(180deg, rgba(20, 20, 20, 0.6) 78.8%, #141414 100%),
+    url("img/pizza.jpg");
+  height: 700px;
+  background-size: cover;
+  background-repeat: no-repeat !important;
+}
+p {
+  text-align: justify;
+}
+@keyframes gradient {
+  0% {
+    background-position: 50% 0%;
+  }
+  50% {
+    background-position: 50% 100%;
+  }
+  100% {
+    background-position: 50% 0%;
+  }
+}
+.buttoni-sleva-menu:focus {
+  color: #d10f18 !important;
+}
+.animated {
+  transition: transform 0.3s ease;
+}
+.animated:hover {
+  transform: translateY(-5px);
+}
+/* Основные стили (дополнены) */
+.redphone {
+  color: #d10f18;
+}
+
+/* Герой секция */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+  background-size: cover;
+  background-position: center;
+  padding: 100px 0;
+}
+
+/* Эффекты при наведении */
+.hover-effect {
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+.hover-effect:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Карточки меню */
+.menu-item {
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+.menu-item:hover {
+  transform: translateY(-5px);
+}
+
+/* Категории */
+.category-card {
+  transition: all 0.3s ease;
+}
+.category-card:hover h5 {
+  color: #d10f18;
+}
+
+/* Анимации */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.6s ease forwards;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .hero-section {
+    padding: 60px 0;
+    text-align: center;
+  }
+  .hero-section h1 {
+    font-size: 2.2rem;
+  }
+}
+/* Основные стили */
+.redphone {
+  color: #d10f18;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Герой секция */
+.hero-section {
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+    url("https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80");
+  background-size: cover;
+  background-position: center;
+  height: 80vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.hero-section::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1;
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Карточки еды */
+.food-card {
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.food-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.food-card .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+/* Иконки преимуществ */
+.icon-wrapper {
+  width: 80px;
+  height: 80px;
+  background-color: rgba(209, 15, 24, 0.1);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+/* Эффекты при наведении */
+.feature-card {
+  transition: all 0.3s ease;
+  border-radius: 10px;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .hero-section {
+    height: auto;
+    padding: 100px 0;
+    text-align: center;
+  }
+
+  .hero-section h1 {
+    font-size: 2.5rem;
+  }
+
+  .hero-section .btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+
+  .food-card {
+    margin-bottom: 20px;
+  }
+}
+
+/* Анимации */
+.animate__animated {
+  animation-duration: 1s;
+}
+/* Стили для страницы меню */
+.redphone {
+  color: #d10f18;
+}
+
+.menu-categories {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.menu-categories .list-group-item {
+  border: none;
+  padding: 12px 20px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.menu-categories .list-group-item.active {
+  background-color: #d10f18;
+  border-color: #d10f18;
+}
+
+.menu-categories .list-group-item:not(.active):hover {
+  background-color: rgba(209, 15, 24, 0.1);
+}
+
+.menu-item {
+  transition: all 0.3s ease;
+  border-radius: 15px;
+  overflow: hidden;
+}
+
+.menu-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.menu-item .card-img-top {
+  height: 200px;
+  object-fit: cover;
+}
+
+.menu-item .card-body {
+  padding-bottom: 0;
+}
+
+.menu-item .card-footer {
+  padding-top: 0;
+}
+
+.badge {
+  font-size: 0.8rem;
+  padding: 5px 10px;
+}
+
+@media (max-width: 768px) {
+  .col-lg-3 {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    background-color: white;
+    padding-bottom: 0 !important;
+  }
+
+  .menu-categories {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-radius: 0;
+  }
+
+  .menu-categories .list-group-item {
+    white-space: nowrap;
+    border-radius: 0 !important;
+  }
+}
