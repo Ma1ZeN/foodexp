@@ -15,7 +15,7 @@ $user_result = mysqli_query($conn, $user_query);
 $user = mysqli_fetch_assoc($user_result);
 
 // Получение заказов пользователя
-$orders_query = "SELECT * FROM cart WHERE User_id = $user_id";
+$orders_query = "SELECT * FROM orders WHERE user_id = $user_id";
 $orders_result = mysqli_query($conn, $orders_query);
 ?>
 <!DOCTYPE html>
