@@ -201,16 +201,18 @@
       </section>
 
       <!-- Популярные заведения -->
+      <!-- Популярные заведения -->
       <section class="py-5">
         <div class="container">
           <h2 class="text-center mb-5 fw-bold">
             Наши <span class="text-danger">партнеры</span>
           </h2>
           <div class="row g-4">
+            <!-- Маруша (уже есть) -->
             <div class="col-md-4">
               <div class="card food-card h-100 border-0 shadow-sm">
                 <div
-                  id="carouselExampleControls"
+                  id="carouselMarusha"
                   class="carousel slide"
                   data-bs-ride="carousel"
                 >
@@ -218,21 +220,21 @@
                     <div class="carousel-item active">
                       <img
                         src="img/Маруша.png"
-                        alt="Наша кухня"
+                        alt="Маруша"
                         class="img-fluid rounded shadow card-img-top"
                       />
                     </div>
                     <div class="carousel-item position-relative">
                       <img
                         src="img/Маруша2.png"
-                        alt="Наша кухня"
+                        alt="Маруша"
                         class="img-fluid rounded shadow card-img-top"
                       />
                     </div>
                     <div class="carousel-item position-relative">
                       <img
                         src="img/Маруша3.png"
-                        alt="Наша кухня"
+                        alt="Маруша"
                         class="img-fluid rounded shadow card-img-top"
                         height="552px"
                       />
@@ -241,7 +243,7 @@
                   <button
                     class="carousel-control-prev"
                     type="button"
-                    data-bs-target="#carouselExampleControls"
+                    data-bs-target="#carouselMarusha"
                     data-bs-slide="prev"
                   >
                     <span
@@ -253,7 +255,7 @@
                   <button
                     class="carousel-control-next"
                     type="button"
-                    data-bs-target="#carouselExampleControls"
+                    data-bs-target="#carouselMarusha"
                     data-bs-slide="next"
                   >
                     <span
@@ -299,15 +301,64 @@
                 </div>
               </div>
             </div>
+
+            <!-- Food mix -->
             <div class="col-md-4">
               <div class="card food-card h-100 border-0 shadow-sm">
-                <div class="position-relative">
-                  <img
-                    src="img/foodmix1.png"
-                    class="card-img-top"
-                    alt="Бургерная"
-                  />
+                <div
+                  id="carouselFoodMix"
+                  class="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner position-relative">
+                    <div class="carousel-item active">
+                      <img
+                        src="img/foodmix1.png"
+                        alt="Food mix"
+                        class="img-fluid rounded shadow card-img-top"
+                      />
+                    </div>
+                    <div class="carousel-item position-relative">
+                      <img
+                        src="img/foodmix2.png"
+                        alt="Food mix"
+                        class="img-fluid rounded shadow card-img-top"
+                      />
+                    </div>
+                    <div class="carousel-item position-relative">
+                      <img
+                        src="img/foodmix3.png"
+                        alt="Food mix"
+                        class="img-fluid rounded shadow card-img-top"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselFoodMix"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselFoodMix"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
+
                 <div class="card-body">
                   <h5 class="card-title mb-2">Food mix</h5>
                   <p class="card-text text-muted small">
@@ -343,15 +394,64 @@
                 </div>
               </div>
             </div>
+
+            <!-- Домашняя пицца -->
             <div class="col-md-4">
               <div class="card food-card h-100 border-0 shadow-sm">
-                <div class="position-relative">
-                  <img
-                    src="https://images.unsplash.com/photo-1513104890138-7c749659a591?ixlib=rb-1.2.1&auto=format&fit=crop&w=800&q=80"
-                    class="card-img-top"
-                    alt="Пиццерия"
-                  />
+                <div
+                  id="carouselPizza"
+                  class="carousel slide"
+                  data-bs-ride="carousel"
+                >
+                  <div class="carousel-inner position-relative">
+                    <div class="carousel-item active">
+                      <img
+                        src="img/pizza1.png"
+                        alt="Домашняя пицца"
+                        class="img-fluid rounded shadow card-img-top"
+                      />
+                    </div>
+                    <div class="carousel-item position-relative">
+                      <img
+                        src="img/pizza2.png"
+                        alt="Домашняя пицца"
+                        class="img-fluid rounded shadow card-img-top"
+                      />
+                    </div>
+                    <div class="carousel-item position-relative">
+                      <img
+                        src="img/pizza3.png"
+                        alt="Домашняя пицца"
+                        class="img-fluid rounded shadow card-img-top"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    class="carousel-control-prev"
+                    type="button"
+                    data-bs-target="#carouselPizza"
+                    data-bs-slide="prev"
+                  >
+                    <span
+                      class="carousel-control-prev-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Previous</span>
+                  </button>
+                  <button
+                    class="carousel-control-next"
+                    type="button"
+                    data-bs-target="#carouselPizza"
+                    data-bs-slide="next"
+                  >
+                    <span
+                      class="carousel-control-next-icon"
+                      aria-hidden="true"
+                    ></span>
+                    <span class="visually-hidden">Next</span>
+                  </button>
                 </div>
+
                 <div class="card-body">
                   <h5 class="card-title mb-2">Домашняя пицца</h5>
                   <p class="card-text text-muted small">
@@ -396,7 +496,6 @@
           </div>
         </div>
       </section>
-
       <!-- Как это работает -->
       <section class="py-5 bg-light">
         <div class="container">
