@@ -2,9 +2,16 @@
 session_start();
 require_once("controllers/db.php");
 $user_id=$_SESSION["id"];
+<<<<<<< HEAD
 $sql="SELECT * FROM cart WHERE user_id = $user_id";
 $sql1="SELECT * FROM Menu"
 $result = $conn->query($sql);++
+=======
+$sql="SELECT product_id FROM cart WHERE user_id = $user_id";
+$result = $conn->query($sql);
+
+
+>>>>>>> 77c1b1bcf9b9a625351dad83f6ed6f6e45311d33
 ?>
 <!DOCTYPE html>
 <html lang="ru">
@@ -140,6 +147,7 @@ $result = $conn->query($sql);++
             <div id="cart-items-container">
               <!-- Пример товара (будет заменен серверным рендерингом) -->
                <?php
+<<<<<<< HEAD
                while($cart = $result->fetch_assoc()){
                 echo
                }
@@ -174,6 +182,45 @@ $result = $conn->query($sql);++
                   </div>
                 </div>
               </div>
+=======
+               $total = 0;
+               while ($row = $result ->fetch_assoc()){
+                $product_id =$row["product_id"];
+                $sql1 = "SELECT * FROM Menu where id = $product_id";
+                $result1 = $conn->query($sql1);
+                while ($row1 = $result1->fetch_assoc()){
+                  $total += $row1["Price"];
+                  echo '<div class="card mb-3 cart-item">
+                          <div class="row g-0">
+                            <div class="col-md-3">
+                              <img src="'.$row1["img"].'" 
+                                  class="img-fluid rounded-start h-100" 
+                                  style="object-fit: cover;">
+                            </div>
+                            <div class="col-md-6">
+                              <div class="card-body">
+                                <h5 class="card-title">'.$row1["Name"].'</h5>
+                                <p class="card-text text-muted">'.$row1["Opisanie"].'</p>
+                                
+                              </div>
+                            </div>
+                            <div class="col-md-3 d-flex flex-column justify-content-between align-items-end p-3">
+                              <button class="btn btn-link text-danger p-0 remove-btn">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
+                                  <path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
+                                </svg>
+                              </button>
+                              <div class="fw-bold price">250 ₽</div>
+                            </div>
+                          </div>
+                        </div>';
+                }
+                
+              }
+               ?>
+              
+>>>>>>> 77c1b1bcf9b9a625351dad83f6ed6f6e45311d33
               
               <!-- Пустая корзина (скрыто по умолчанию) -->
               <div id="empty-cart-message" class="empty-cart text-center d-none">
@@ -193,23 +240,13 @@ $result = $conn->query($sql);++
             <div class="card summary-card">
               <div class="card-body">
                 <h5 class="card-title mb-3">Итого</h5>
-                
-                <div class="d-flex justify-content-between mb-2">
-                  <span>Товары (1):</span>
-                  <span id="subtotal">250 ₽</span>
-                </div>
-                
-             
-                
                 <hr>
                 
                 <div class="d-flex justify-content-between fw-bold fs-5 mb-4">
                   <span>К оплате:</span>
-                  <span id="total-price">250 ₽</span>
+                  <span id="total-price"><?php echo $total ?></span>
                 </div>
-                
                 <button id="checkout-btn" class="btn btn-danger w-100 py-2">Оформить заказ</button>
-            
               </div>
             </div>
           </div>
@@ -321,9 +358,36 @@ $result = $conn->query($sql);++
         }
         
         document.getElementById('checkout-btn').addEventListener('click', function() {
-          // Здесь будет отправка данных заказа на сервер
-          alert('Заказ оформлен! (это демо, на реальном сайте будет переход к оформлению)');
-        });
+          // Показываем индикатор загрузки
+          this.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Оформление...';
+          this.disabled = true;
+          
+          fetch('create_order.php', {
+              method: 'POST',
+              headers: {
+                  'Content-Type': 'application/json',
+              }
+          })
+          .then(response => response.json())
+          .then(data => {
+              if (data.success) {
+                  alert(data.message);
+                  // Обновляем страницу после успешного оформления
+                  location.reload();
+              } else {
+                  alert('Ошибка: ' + data.message);
+              }
+          })
+          .catch(error => {
+              console.error('Error:', error);
+              alert('Произошла ошибка при оформлении заказа');
+          })
+          .finally(() => {
+              // Восстанавливаем кнопку в исходное состояние
+              this.innerHTML = 'Оформить заказ';
+              this.disabled = false;
+          });
+      });
       });
     </script>
   </body>
