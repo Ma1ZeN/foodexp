@@ -110,6 +110,7 @@ $result = $conn->query($sql);
       }
       
       .menu-item-desc {
+        height: 103px;
         color: var(--light-text);
         font-size: 0.9rem;
         margin-bottom: 15px;
@@ -198,6 +199,8 @@ $result = $conn->query($sql);
       .alert-success {
         border-left: 4px solid #28a745;
         border-radius: 0;
+      }
+      .card{
       }
     </style>
   </head>
